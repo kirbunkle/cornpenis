@@ -1,3 +1,6 @@
 [submodule "lib/middleclass"]
 	path = lib/middleclass
 	url = https://github.com/kikito/middleclass.git
+[submodule "lib/bump.lua"]
+	path = lib/bump.lua
+	url = https://github.com/kikito/bump.lua.git
