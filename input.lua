@@ -13,6 +13,10 @@ function Input:initialize()
   self.rightPressed = false
   self.dash = 'lshift'
   self.dashPressed = false
+  self.click = 'l'
+  self.clickPressed = false
+  self.clickX = 0
+  self.clickY = 0
 end
 
 function Input:update(dt)
@@ -21,6 +25,10 @@ function Input:update(dt)
   self.leftPressed = love.keyboard.isDown(self.left)
   self.rightPressed = love.keyboard.isDown(self.right)
   self.dashPressed = love.keyboard.isDown(self.dash)
+  self.clickPressed = love.mouse.isDown(self.click)
+  if self.clickPressed then
+    self.clickX, self.clickY = love.mouse.getPosition()
+  end
 end
 
 return Input

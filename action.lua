@@ -4,15 +4,15 @@ local Action = class('Action')
 
 function Action:initialize(actionText)
   -- TODO need to parse out the action text to get what this action will contain  
-  self.xToMove = 350
-  self.yToMove = 350
+  self.xToMove = 50
+  self.yToMove = 50
   self.xVel = 200
   self.yVel = 200
   
   self.xMoved = 0
   self.yMoved = 0
   
-  self.target = 1
+  self.target = tonumber(actionText)
   
   self.running = true
   self.wait = true -- wait until the action is finished before running another action
@@ -29,7 +29,7 @@ function Action:update(dt, objectArray)
       yVel = self.yToMove - self.yMoved
     end
 
-    objectArray[1]:move(xVel, yVel)
+    objectArray[self.target]:move(xVel, yVel)
 
     self.xMoved = self.xMoved + xVel
     self.yMoved = self.yMoved + yVel
