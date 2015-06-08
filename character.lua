@@ -10,7 +10,7 @@ function Character:initialize(imagepath, fx, fy)
   self.walkingAnimation = anim8.newAnimation(grid('1-8', 1), 0.1)
   self.standingAnimation = anim8.newAnimation(grid('1-8', 1), 0.3)
   self.currentAnimation = self.standingAnimation
-  self.image = love.graphics.newImage(imagepath)
+  self.image = GRAPHICS:getImage(imagepath)
   self.x = fx
   self.y = fy
   

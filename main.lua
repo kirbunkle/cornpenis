@@ -18,6 +18,10 @@ function love.load()
   objectArray[1] = pc -- first element; arrays are 1 based
   objectArray[2] = Character:new('graphics/purple.jpg', 500, 400)
   objectArray[3] = Character:new('graphics/purple.jpg', 300, 100)
+  
+  for i = 4, 500 do
+    objectArray[i] = Character:new('graphics/purple.jpg', ((i * 32) % 600) + 32, math.ceil((i * 32) / 600) + 32)
+  end
 end
 
 function love.update(dt)
