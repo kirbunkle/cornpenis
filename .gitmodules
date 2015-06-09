@@ -7,3 +7,6 @@
 [submodule "lib/bump.lua"]
 	path = lib/bump
 	url = https://github.com/kikito/bump.lua.git
+[submodule "lib/Advanced-Tiled-Loader"]
+	path = lib/Advanced-Tiled-Loader
+	url = https://github.com/Kadoba/Advanced-Tiled-Loader.git
