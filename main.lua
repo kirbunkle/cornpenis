@@ -1,10 +1,13 @@
 require 'globals'
 
+local sti = require "lib.sti"
+
 local Character = require 'character'
 local Controller = require 'controller'
 
 local objectArray = nil
 local controller = nil
+local map = nil
 
 function love.load()
   initGlobals()
@@ -19,10 +22,14 @@ function love.load()
   objectArray[2] = Character:new('graphics/purple.jpg', 500, 400)
   objectArray[3] = Character:new('graphics/purple.jpg', 300, 100)
   
+  map = sti.new("maps/untitled")
+  
 end
 
 function love.update(dt)
   controller:update(dt, objectArray)
+  
+  map:update(dt)
   
   for i, v in ipairs(objectArray) do
     v:update(dt)
@@ -33,6 +40,9 @@ function love.update(dt)
 end
 
 function love.draw()
+  
+  map:draw()
+  
   for i, v in ipairs(objectArray) do
     v:draw()
   end

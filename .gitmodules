@@ -11,5 +11,5 @@
 	path = lib/Advanced-Tiled-Loader
 	url = https://github.com/Kadoba/Advanced-Tiled-Loader.git
 [submodule "lib/Simple-Tiled-Implementation"]
-	path = lib/Simple-Tiled-Implementation
+	path = lib/sti
 	url = https://github.com/karai17/Simple-Tiled-Implementation.git
