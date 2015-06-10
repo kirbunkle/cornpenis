@@ -1,4 +1,5 @@
 require 'globals'
+require 'mapRoutines'
 
 local sti = require "lib.sti"
 
@@ -22,12 +23,14 @@ function love.load()
   objectArray[2] = Character:new('graphics/purple.jpg', 500, 400)
   objectArray[3] = Character:new('graphics/purple.jpg', 300, 100)
   
-  map = sti.new("maps/untitled")
-  
+  map = sti.new("maps/test")
+  map.x = 0
+  map.y = 0
+  initMapCollision(map)
 end
 
 function love.update(dt)
-  controller:update(dt, objectArray)
+  controller:update(dt, objectArray, map)
   
   map:update(dt)
   
@@ -40,9 +43,9 @@ function love.update(dt)
 end
 
 function love.draw()
-  
+  love.graphics.translate(map.x, map.y)
+  map:setDrawRange(map.x, map.y, SCREEN.w, SCREEN.h)
   map:draw()
-  
   for i, v in ipairs(objectArray) do
     v:draw()
   end

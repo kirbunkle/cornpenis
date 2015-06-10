@@ -2,6 +2,8 @@ local class = require 'lib.middleclass.middleclass'
 local Input = require 'input'
 local Action = require 'action'
 
+require 'mapRoutines'
+
 local Controller = class('Controller')
 
 function Controller:initialize()
@@ -16,20 +18,17 @@ function Controller:initialize()
   self.dashMultiplier = 2
 end
 
-function Controller:update(dt, objectArray)
+function Controller:update(dt, objectArray, map)
   self.input:update(dt)
   
   if self.input.clickPressed then
-    local items, len = WORLD:queryPoint(self.input.clickX, self.input.clickY)
+    -- TODO update to use love.mousepressed instead of this business
+    local items, len = WORLD:queryPoint(self.input.clickX - map.x, self.input.clickY - map.y)
     for i = 1, len do
-      items[i]:onClick()
+      if items[i].onClick then
+        items[i]:onClick()
+      end
     end
-  end
-
-  if self.playerControll then
-    -- if controlling is enabled, update objectArray[1] (player character)
-    local xVel, yVel = self:getPlayerVel(dt)
-    objectArray[1]:move(xVel, yVel)
   end
 
   local actionCount = #self.actions
@@ -44,6 +43,21 @@ function Controller:update(dt, objectArray)
   else
     self.playerControll = true
   end
+  
+  if self.playerControll then
+    -- if controlling is enabled, update objectArray[1] (player character)
+    local xVel, yVel = self:getPlayerVel(dt)
+    objectArray[1]:move(xVel, yVel)
+    self:center(objectArray[1], map)
+  end
+end
+
+function Controller:center(centerObject, map)
+  local x, y, w, h = centerObject:getDimensions()
+  local moveX = (SCREEN.midW - (w / 2)) - x
+  local moveY = (SCREEN.midH - (h / 2)) - y
+  
+  moveMap(map, moveX, moveY)
 end
 
 function Controller:getPlayerVel(dt)

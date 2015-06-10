@@ -5,7 +5,10 @@ require 'globals'
 local Character = class('Character')
 
 function Character:initialize(imagepath, fx, fy)
-  local grid = anim8.newGrid(32, 32, 512, 512)
+  self.w = 32
+  self.h = 32
+  
+  local grid = anim8.newGrid(self.w, self.h, 512, 512)
   
   self.walkingAnimation = anim8.newAnimation(grid('1-8', 1), 0.1)
   self.standingAnimation = anim8.newAnimation(grid('1-8', 1), 0.3)
@@ -19,7 +22,7 @@ function Character:initialize(imagepath, fx, fy)
   
   self.active = true -- flag to tell when to clean this thing up
   
-  WORLD:add(self, fx, fy, 32, 32)
+  WORLD:add(self, fx, fy, self.w, self.h)
 end
 
 function Character:update(dt)
@@ -35,12 +38,7 @@ function Character:update(dt)
     end
 
     self.currentAnimation:update(dt)
-
-    local cols = 0
-    local len = 0
-
-    self.x, self.y, cols, len = WORLD:move(self, self.x + self.xVel, self.y + self.yVel)
-
+    
     -- reset for next update
     self.xVel = 0
     self.yVel = 0
@@ -54,8 +52,15 @@ function Character:draw()
 end
 
 function Character:move(xVel, yVel)
-  self.xVel = xVel
-  self.yVel = yVel
+  if self.active then
+    self.xVel = xVel
+    self.yVel = yVel
+  
+    local cols = 0
+    local len = 0
+
+    self.x, self.y, cols, len = WORLD:move(self, self.x + self.xVel, self.y + self.yVel)
+  end
 end
 
 function Character:onClick()
@@ -69,6 +74,10 @@ end
 
 function Character:isDestroyed()
   return not self.active
+end
+
+function Character:getDimensions()
+  return self.x, self.y, self.w, self.h
 end
 
 return Character
