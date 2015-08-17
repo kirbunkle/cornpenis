@@ -62,6 +62,7 @@ function Character:move(xVel, yVel)
     local len = 0
 
     self.x, self.y, cols, len = WORLD:move(self, self.x + self.xVel, self.y + self.yVel)
+    SOUND:play("/sounds/splat.mp3", "static")
    end
 end
 
