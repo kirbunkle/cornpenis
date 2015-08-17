@@ -5,6 +5,7 @@ local sti = require "lib.sti"
 
 local Character = require 'character'
 local Controller = require 'controller'
+local Sound = require 'soundManager'
 
 local objectArray = nil
 local controller = nil
@@ -17,6 +18,7 @@ function love.load()
   local pc = Character:new('graphics/grass.png', 100, 100)
   objectArray = {}
   
+  
   -- TODO: these should be referenced by name, not by number (move 'player' instead of move '1')
   
   objectArray[1] = pc -- first element; arrays are 1 based
@@ -27,6 +29,7 @@ function love.load()
   map.x = 0
   map.y = 0
   initMapCollision(map)
+  
 end
 
 function love.update(dt)

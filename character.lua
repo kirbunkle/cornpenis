@@ -1,8 +1,10 @@
 local class = require 'lib.middleclass.middleclass'
 local anim8 = require 'lib.anim8.anim8'
 require 'globals'
+require 'soundManager'
 
 local Character = class('Character')
+
 
 function Character:initialize(imagepath, fx, fy)
   self.w = 32
@@ -60,7 +62,7 @@ function Character:move(xVel, yVel)
     local len = 0
 
     self.x, self.y, cols, len = WORLD:move(self, self.x + self.xVel, self.y + self.yVel)
-  end
+   end
 end
 
 function Character:onClick()

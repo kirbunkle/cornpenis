@@ -1,8 +1,10 @@
 local bump = require 'lib.bump.bump'
 local GraphicsManager = require 'graphicsManager'
+local SoundManager = require 'soundManager'
 
 WORLD = nil
 GRAPHICS = nil
+SOUND = nil
 SCREEN = {}
 
 function initWorld()
@@ -18,5 +20,6 @@ end
 function initGlobals()
   initWorld()
   GRAPHICS = GraphicsManager:new()
+  SOUND = SoundManager:new()  
   initScreen()
 end
