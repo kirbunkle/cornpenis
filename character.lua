@@ -1,26 +1,23 @@
 local class = require 'lib.middleclass.middleclass'
-local anim8 = require 'lib.anim8.anim8'
+local CharacterSprite = require 'characterSprite'
+
 require 'globals'
-require 'soundManager'
 
 local Character = class('Character')
 
-
-function Character:initialize(imagepath, fx, fy)
-  self.w = 32
-  self.h = 32
+function Character:initialize(spriteId, fx, fy)
+  self.sprite = CharacterSprite:new(spriteId)
   
-  local grid = anim8.newGrid(self.w, self.h, 512, 512)
+  self.w, self.h = self.sprite:getWH()
   
-  self.walkingAnimation = anim8.newAnimation(grid('1-8', 1), 0.1)
-  self.standingAnimation = anim8.newAnimation(grid('1-8', 1), 0.3)
-  self.currentAnimation = self.standingAnimation
-  self.image = GRAPHICS:getImage(imagepath)
   self.x = fx
   self.y = fy
   
   self.xVel = 0
   self.yVel = 0
+  
+  self.curDir = DIR_DOWN
+  self.curAct = ACT_STAND
   
   self.active = true -- flag to tell when to clean this thing up
   
@@ -29,17 +26,25 @@ end
 
 function Character:update(dt)
   if self.active then
+    if self.xVel < 0 then
+      self.curDir = DIR_LEFT
+    elseif self.xVel > 0 then
+      self.curDir = DIR_RIGHT
+    end
+    if self.yVel < 0 then
+      self.curDir = DIR_UP
+    elseif self.yVel > 0 then
+      self.curDir = DIR_DOWN
+    end
+    
     if (self.xVel == 0) and (self.yVel == 0) then
-      if (self.currentAnimation ~= self.standingAnimation) then
-        self.currentAnimation = self.standingAnimation
-        self.currentAnimation:gotoFrame(1)
-      end
-    elseif (self.currentAnimation ~= self.walkingAnimation) then 
-      self.currentAnimation = self.walkingAnimation
-      self.currentAnimation:gotoFrame(1)
+      self.curAct = ACT_STAND
+    else
+      self.curAct = ACT_WALK
     end
 
-    self.currentAnimation:update(dt)
+    self.sprite:switchAnimation(self.curDir + self.curAct)
+    self.sprite:update(dt)
     
     -- reset for next update
     self.xVel = 0
@@ -49,7 +54,7 @@ end
 
 function Character:draw()
   if self.active then
-    self.currentAnimation:draw(self.image, self.x, self.y)
+    self.sprite:draw(self.x, self.y)
   end
 end
 
@@ -62,8 +67,7 @@ function Character:move(xVel, yVel)
     local len = 0
 
     self.x, self.y, cols, len = WORLD:move(self, self.x + self.xVel, self.y + self.yVel)
-    SOUND:play("/sounds/splat.mp3", "static")
-   end
+  end
 end
 
 function Character:onClick()
