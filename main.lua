@@ -14,7 +14,7 @@ function love.load()
   initGlobals()
   controller = Controller:new()
   -- init objects
-  local pc = Character:new(1, 100, 100)
+  local pc = Character:new(4, 100, 100)
   objectArray = {}
   
   

@@ -11,9 +11,14 @@ function Database:initialize()
   -- reorganize the data so we can find tables and fields by name
   for i, v in ipairs(self.gamedata['objects']) do 
     self.gamedata['objects'][v['name']] = v
-    
+    local rowCount = #v['rows']
+
     -- cryptic af
-    for j, w in ipairs(v['rows']) do 
+    for j = rowCount, 1, -1 do 
+      local w = v['rows'][j]
+      v['rows'][j] = nil
+      v['rows'][w[1]] = w -- assume the first field is the id
+      
       for k, x in ipairs(w) do 
         w[v['columns'][k]['name']] = x
       end
