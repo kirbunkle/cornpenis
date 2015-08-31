@@ -5,9 +5,84 @@
         {
             "type": "table",
             "database": null,
+            "name": "images",
+            "withoutRowId": true,
+            "ddl": "CREATE TABLE images (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, filename CHAR NOT NULL, folder_id INTEGER NOT NULL REFERENCES folders (id), height INTEGER, width INTEGER)",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY AUTOINCREMENT "
+                        },
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL "
+                        },
+                        {
+                            "type": "UNIQUE",
+                            "definition": "UNIQUE"
+                        }
+                    ]
+                },
+                {
+                    "name": "filename",
+                    "type": "CHAR",
+                    "constraints": [
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "folder_id",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL "
+                        },
+                        {
+                            "type": "FOREIGN KEY",
+                            "definition": "REFERENCES folders (id)"
+                        }
+                    ]
+                },
+                {
+                    "name": "height",
+                    "type": "INTEGER"
+                },
+                {
+                    "name": "width",
+                    "type": "INTEGER"
+                }
+            ],
+            "rows": [
+                [
+                    1,
+                    "grass.png",
+                    1,
+                    512,
+                    512
+                ],
+                [
+                    2,
+                    "purple.jpg",
+                    1,
+                    512,
+                    512
+                ]
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
             "name": "animations",
             "withoutRowId": true,
-            "ddl": "CREATE TABLE animations (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL, name CHAR UNIQUE NOT NULL, image_id INTEGER REFERENCES images (id) NOT NULL, grid_row INTEGER NOT NULL, grid_cols CHAR NOT NULL, width INTEGER NOT NULL, height INTEGER NOT NULL, framerate DECIMAL)",
+            "ddl": "CREATE TABLE animations (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL, name CHAR UNIQUE NOT NULL, image_id INTEGER NOT NULL REFERENCES images (id), grid_row INTEGER NOT NULL, grid_cols CHAR NOT NULL, width INTEGER NOT NULL, height INTEGER NOT NULL, framerate DECIMAL)",
             "columns": [
                 {
                     "name": "id",
@@ -46,12 +121,12 @@
                     "type": "INTEGER",
                     "constraints": [
                         {
-                            "type": "FOREIGN KEY",
-                            "definition": "REFERENCES images (id) "
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL "
                         },
                         {
-                            "type": "NOT NULL",
-                            "definition": "NOT NULL"
+                            "type": "FOREIGN KEY",
+                            "definition": "REFERENCES images (id)"
                         }
                     ]
                 },
@@ -180,128 +255,6 @@
                     16,
                     16,
                     0.3
-                ]
-            ]
-        },
-        {
-            "type": "table",
-            "database": null,
-            "name": "images",
-            "withoutRowId": true,
-            "ddl": "CREATE TABLE images (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, filename CHAR NOT NULL, folder_id INTEGER NOT NULL REFERENCES image_folders (id), height INTEGER, width INTEGER)",
-            "columns": [
-                {
-                    "name": "id",
-                    "type": "INTEGER",
-                    "constraints": [
-                        {
-                            "type": "PRIMARY KEY",
-                            "definition": "PRIMARY KEY AUTOINCREMENT "
-                        },
-                        {
-                            "type": "NOT NULL",
-                            "definition": "NOT NULL "
-                        },
-                        {
-                            "type": "UNIQUE",
-                            "definition": "UNIQUE"
-                        }
-                    ]
-                },
-                {
-                    "name": "filename",
-                    "type": "CHAR",
-                    "constraints": [
-                        {
-                            "type": "NOT NULL",
-                            "definition": "NOT NULL"
-                        }
-                    ]
-                },
-                {
-                    "name": "folder_id",
-                    "type": "INTEGER",
-                    "constraints": [
-                        {
-                            "type": "NOT NULL",
-                            "definition": "NOT NULL "
-                        },
-                        {
-                            "type": "FOREIGN KEY",
-                            "definition": "REFERENCES image_folders (id)"
-                        }
-                    ]
-                },
-                {
-                    "name": "height",
-                    "type": "INTEGER"
-                },
-                {
-                    "name": "width",
-                    "type": "INTEGER"
-                }
-            ],
-            "rows": [
-                [
-                    1,
-                    "grass.png",
-                    1,
-                    512,
-                    512
-                ],
-                [
-                    2,
-                    "purple.jpg",
-                    1,
-                    512,
-                    512
-                ]
-            ]
-        },
-        {
-            "type": "table",
-            "database": null,
-            "name": "image_folders",
-            "withoutRowId": true,
-            "ddl": "CREATE TABLE image_folders (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL, path CHAR UNIQUE NOT NULL)",
-            "columns": [
-                {
-                    "name": "id",
-                    "type": "INTEGER",
-                    "constraints": [
-                        {
-                            "type": "PRIMARY KEY",
-                            "definition": "PRIMARY KEY AUTOINCREMENT "
-                        },
-                        {
-                            "type": "UNIQUE",
-                            "definition": "UNIQUE "
-                        },
-                        {
-                            "type": "NOT NULL",
-                            "definition": "NOT NULL"
-                        }
-                    ]
-                },
-                {
-                    "name": "path",
-                    "type": "CHAR",
-                    "constraints": [
-                        {
-                            "type": "UNIQUE",
-                            "definition": "UNIQUE "
-                        },
-                        {
-                            "type": "NOT NULL",
-                            "definition": "NOT NULL"
-                        }
-                    ]
-                }
-            ],
-            "rows": [
-                [
-                    1,
-                    "graphics\/"
                 ]
             ]
         },
@@ -494,6 +447,114 @@
                     1,
                     1
                 ]
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "folders",
+            "withoutRowId": true,
+            "ddl": "CREATE TABLE folders (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL, path CHAR UNIQUE NOT NULL)",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY AUTOINCREMENT "
+                        },
+                        {
+                            "type": "UNIQUE",
+                            "definition": "UNIQUE "
+                        },
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "path",
+                    "type": "CHAR",
+                    "constraints": [
+                        {
+                            "type": "UNIQUE",
+                            "definition": "UNIQUE "
+                        },
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                }
+            ],
+            "rows": [
+                [
+                    1,
+                    "graphics\/"
+                ],
+                [
+                    2,
+                    "sounds\/"
+                ]
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "sounds",
+            "withoutRowId": true,
+            "ddl": "CREATE TABLE sounds (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL, filename CHAR UNIQUE NOT NULL, folder_id INTEGER REFERENCES folders (id) NOT NULL)",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY AUTOINCREMENT "
+                        },
+                        {
+                            "type": "UNIQUE",
+                            "definition": "UNIQUE "
+                        },
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "filename",
+                    "type": "CHAR",
+                    "constraints": [
+                        {
+                            "type": "UNIQUE",
+                            "definition": "UNIQUE "
+                        },
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "folder_id",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "FOREIGN KEY",
+                            "definition": "REFERENCES folders (id) "
+                        },
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                }
+            ],
+            "rows": [
             ]
         }
     ]

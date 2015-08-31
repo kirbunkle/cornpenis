@@ -7,16 +7,14 @@ local Animation = class('Animation')
 
 function Animation:initialize(id)
   local animdata = DB:getRowById('animations', id)
-  local imgdata = DB:getRowById('images', animdata['image_id'])
-  local imgpath = DB:getValueById('image_folders', imgdata['folder_id'], 'path')..imgdata['filename']
   
   self.w = animdata['width']
   self.h = animdata['height']
   
-  local grid = anim8.newGrid(self.w, self.h, imgdata['width'], imgdata['height'])
+  self.image = GRAPHICS:getImage(animdata['image_id'])
+  local grid = anim8.newGrid(self.w, self.h, self.image:getWidth(), self.image:getHeight())
   
   self.animation = anim8.newAnimation(grid(animdata['grid_cols'], animdata['grid_row']), animdata['framerate'])
-  self.image = GRAPHICS:getImage(imgpath)
 end
 
 function Animation:update(dt)

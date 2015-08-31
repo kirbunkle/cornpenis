@@ -23,7 +23,7 @@ end
 function initGlobals()
   initWorld()
   DB = Database:new()
-  GRAPHICS = GraphicsManager:new()
-  SOUND = SoundManager:new()
+  GRAPHICS = GraphicsManager:new(DB)
+  SOUND = SoundManager:new(DB)
   initScreen()
 end
