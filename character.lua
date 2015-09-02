@@ -19,6 +19,8 @@ function Character:initialize(spriteId, fx, fy)
   self.curDir = DIR_DOWN
   self.curAct = ACT_STAND
   
+  self.stepSoundToggle = false -- alternates between walking and not walking to play a sound when we switch
+  
   self.active = true -- flag to tell when to clean this thing up
   
   WORLD:add(self, fx, fy, self.w, self.h)
@@ -39,9 +41,15 @@ function Character:update(dt)
     
     if (self.xVel == 0) and (self.yVel == 0) then
       self.curAct = ACT_STAND
+      if self.stepSoundToggle then
+        self.stepSoundToggle = false
+      end
     else
       self.curAct = ACT_WALK
-      SOUND:play(2)
+      if not self.stepSoundToggle then
+        SOUND:playSE(2)
+        self.stepSoundToggle = true
+      end
     end
 
     self.sprite:switchAnimation(self.curDir + self.curAct)

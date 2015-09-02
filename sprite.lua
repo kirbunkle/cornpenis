@@ -18,8 +18,8 @@ function Sprite:initialize(animationIds)
       self.w, self.h = self.animations[i]:getWH()
     else
       local tmpW, tmpH = self.animations[i]:getWH()
-      assert(self.w == tmpW)
-      assert(self.h == tmpH) 
+      assert(self.w == tmpW, 'Sprite:initialize() not all animations have matching widths')
+      assert(self.h == tmpH, 'Sprite:initialize() not all animations have matching heights') 
     end
   end
   
