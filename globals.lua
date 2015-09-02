@@ -2,6 +2,7 @@ local bump = require 'lib.bump.bump'
 local GraphicsManager = require 'graphicsManager'
 local SoundManager = require 'soundManager'
 local Database = require 'database'
+local Hud = require 'hud'
 
 -- global objects
 WORLD = nil
@@ -25,5 +26,6 @@ function initGlobals()
   DB = Database:new()
   GRAPHICS = GraphicsManager:new(DB)
   SOUND = SoundManager:new(DB)
+  --HUD = Hud:new()
   initScreen()
 end

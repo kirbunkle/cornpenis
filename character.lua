@@ -41,11 +41,12 @@ function Character:update(dt)
       self.curAct = ACT_STAND
     else
       self.curAct = ACT_WALK
+      SOUND:play(2)
     end
 
     self.sprite:switchAnimation(self.curDir + self.curAct)
     self.sprite:update(dt)
-    
+
     -- reset for next update
     self.xVel = 0
     self.yVel = 0

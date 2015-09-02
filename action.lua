@@ -6,8 +6,8 @@ function Action:initialize(actionText)
   -- TODO need to parse out the action text to get what this action will contain  
   self.xToMove = 50
   self.yToMove = 50
-  self.xVel = 200
-  self.yVel = 200
+  self.xVel = 50
+  self.yVel = 50
   
   self.xMoved = 0
   self.yMoved = 0
@@ -35,6 +35,7 @@ function Action:update(dt, objectArray)
     self.yMoved = self.yMoved + yVel
     if (self.xMoved >= self.xToMove) and (self.yMoved >= self.yToMove) then
       self.running = false
+      SOUND:play(1)
     end
   end
 end
