@@ -28,6 +28,7 @@ function love.load()
   map.x = 0
   map.y = 0
   initMapCollision(map)
+
   
 end
 
@@ -49,8 +50,7 @@ function love.draw()
   map:setDrawRange(map.x, map.y, SCREEN.w, SCREEN.h)
   map:draw()
   HUD:newHud()
-  love.graphics.setColor(158, 185, 126)
-      love.graphics.rectangle("fill", 200, 200, 200, 400)
+  love.graphics.setColor(255,255,255)
   for i, v in ipairs(objectArray) do
     v:draw()
   end

@@ -3,15 +3,15 @@ local class = require 'lib.middleclass.middleclass'
 local hud = class('hud')
 
 function hud:initialize()
-	self.hud = {}
+	--self.hud = {}
 
 end
 
 function hud:newHud()
-	if self.hud == nil then
-	  love.graphics.setColor(158, 185, 126)
-      love.graphics.rectangle("fill", 200, 200, 200, 400)
-  end
+	--if self.hud == nil then
+	  love.graphics.setColor(40, 50, 227)
+      love.graphics.rectangle("fill", 100, 100, 400, 100)
+  --end
 end
 
 return hud
