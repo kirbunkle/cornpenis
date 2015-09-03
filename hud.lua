@@ -10,7 +10,9 @@ end
 function hud:newHud()
 	--if self.hud == nil then
 	  love.graphics.setColor(40, 50, 227)
-      love.graphics.rectangle("fill", 100, 100, 400, 100)
+    love.graphics.rectangle("fill", 100, 100, 400, 100)
+    love.graphics.setColor(255,255,255)
+
   --end
 end
 

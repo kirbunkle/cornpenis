@@ -46,13 +46,13 @@ function love.update(dt)
 end
 
 function love.draw()
+  love.graphics.push()
   love.graphics.translate(map.x, map.y)
   map:setDrawRange(map.x, map.y, SCREEN.w, SCREEN.h)
   map:draw()
-  HUD:newHud()
-  love.graphics.setColor(255,255,255)
   for i, v in ipairs(objectArray) do
     v:draw()
   end
-
+  love.graphics.pop()
+  HUD:newHud()
 end
