@@ -48,7 +48,11 @@ function love.draw()
   love.graphics.translate(map.x, map.y)
   map:setDrawRange(map.x, map.y, SCREEN.w, SCREEN.h)
   map:draw()
+  HUD:newHud()
+  love.graphics.setColor(158, 185, 126)
+      love.graphics.rectangle("fill", 200, 200, 200, 400)
   for i, v in ipairs(objectArray) do
     v:draw()
   end
+
 end
