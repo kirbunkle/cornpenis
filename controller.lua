@@ -21,9 +21,16 @@ end
 function Controller:update(dt, objectArray, map)
   self.input:update(dt)
   
+  -- TODO update to use love.mousepressed instead of this business
+  local items, len = WORLD:queryPoint(self.input.clickX - map.x, self.input.clickY - map.y)
+  
+  for i = 1, len do
+    if items[i].onHover then
+      items[i]:onHover()
+    end
+  end
+  
   if self.input.clickPressed then
-    -- TODO update to use love.mousepressed instead of this business
-    local items, len = WORLD:queryPoint(self.input.clickX - map.x, self.input.clickY - map.y)
     for i = 1, len do
       if items[i].onClick then
         items[i]:onClick()
