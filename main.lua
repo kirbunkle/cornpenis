@@ -5,10 +5,12 @@ local sti = require "lib.sti"
 
 local Character = require 'character'
 local Controller = require 'controller'
+local Hud = require 'hud'
 
 local objectArray = nil
 local controller = nil
 local map = nil
+local hud = nil
 
 function love.load()
   initGlobals()
@@ -28,7 +30,7 @@ function love.load()
   map.x = 0
   map.y = 0
   initMapCollision(map)
-
+  hud = Hud:new()
   
 end
 
@@ -54,5 +56,5 @@ function love.draw()
     v:draw()
   end
   love.graphics.pop()
-  HUD:newHud()
+  hud:draw()
 end

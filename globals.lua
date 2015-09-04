@@ -26,6 +26,6 @@ function initGlobals()
   DB = Database:new()
   GRAPHICS = GraphicsManager:new(DB)
   SOUND = SoundManager:new(DB)
-  HUD = Hud:new()
+  --HUD = Hud:new()
   initScreen()
 end
