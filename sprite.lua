@@ -33,6 +33,10 @@ function Sprite:switchAnimation(id)
   end
 end
 
+function Sprite:reset()
+  self.curAnimation:reset()
+end
+
 function Sprite:update(dt)
   self.curAnimation:update(dt)
 end

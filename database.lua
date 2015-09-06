@@ -28,11 +28,14 @@ function Database:initialize()
 end
 
 function Database:getRowById(table, id)
+  assert(self.gamedata['objects'][table], 'Database:getRowById, requested table '..table..' does not exist')
+  assert(self.gamedata['objects'][table]['rows'][id], 'Database:getRowById, requested id '..tostring(id)..' for table '..table..' does not exist')
   return self.gamedata['objects'][table]['rows'][id]
 end
 
 function Database:getValueById(table, id, field)
   local row = self:getRowById(table, id)
+  assert(row[field], 'Database:getValueById, requested field '..field..' does not exist for table '..table)
   return row[field]
 end
 

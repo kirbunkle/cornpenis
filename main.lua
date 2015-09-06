@@ -4,6 +4,7 @@ require 'mapRoutines'
 local sti = require "lib.sti"
 
 local Character = require 'character'
+local Item = require 'item'
 local Controller = require 'controller'
 local Hud = require 'hud'
 
@@ -25,6 +26,8 @@ function love.load()
   objectArray[1] = pc -- first element; arrays are 1 based
   objectArray[2] = Character:new(2, 500, 400)
   objectArray[3] = Character:new(3, 300, 100)
+  objectArray[4] = Item:new(1, 800, 800)
+  
   
   map = sti.new("maps/test")
   map.x = 0

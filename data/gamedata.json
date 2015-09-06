@@ -5,57 +5,6 @@
         {
             "type": "table",
             "database": null,
-            "name": "folders",
-            "withoutRowId": true,
-            "ddl": "CREATE TABLE folders (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL, path CHAR UNIQUE NOT NULL)",
-            "columns": [
-                {
-                    "name": "id",
-                    "type": "INTEGER",
-                    "constraints": [
-                        {
-                            "type": "PRIMARY KEY",
-                            "definition": "PRIMARY KEY AUTOINCREMENT "
-                        },
-                        {
-                            "type": "UNIQUE",
-                            "definition": "UNIQUE "
-                        },
-                        {
-                            "type": "NOT NULL",
-                            "definition": "NOT NULL"
-                        }
-                    ]
-                },
-                {
-                    "name": "path",
-                    "type": "CHAR",
-                    "constraints": [
-                        {
-                            "type": "UNIQUE",
-                            "definition": "UNIQUE "
-                        },
-                        {
-                            "type": "NOT NULL",
-                            "definition": "NOT NULL"
-                        }
-                    ]
-                }
-            ],
-            "rows": [
-                [
-                    1,
-                    "graphics\/"
-                ],
-                [
-                    2,
-                    "sounds\/"
-                ]
-            ]
-        },
-        {
-            "type": "table",
-            "database": null,
             "name": "images",
             "withoutRowId": true,
             "ddl": "CREATE TABLE images (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, filename CHAR NOT NULL, folder_id INTEGER NOT NULL REFERENCES folders (id), height INTEGER, width INTEGER)",
@@ -564,6 +513,161 @@
                     2,
                     "splat.mp3",
                     2
+                ],
+                [
+                    3,
+                    "TROG_LightDrop.ogg",
+                    2
+                ],
+                [
+                    4,
+                    "PTM_TheGrassWavesBack.ogg",
+                    2
+                ],
+                [
+                    5,
+                    "TROG_AutumnGlass.ogg",
+                    2
+                ],
+                [
+                    6,
+                    "TROG_GreasyGrimyGuts.ogg",
+                    2
+                ],
+                [
+                    7,
+                    "LICH_TheWorldIsOurCanvas.ogg",
+                    2
+                ],
+                [
+                    8,
+                    "TROG_Ignious.ogg",
+                    2
+                ],
+                [
+                    9,
+                    "LUN_GemstonePalace.ogg",
+                    2
+                ]
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "items",
+            "withoutRowId": true,
+            "ddl": "CREATE TABLE items (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL, name CHAR NOT NULL, type CHAR NOT NULL, animation_id INTEGER REFERENCES animations (id) NOT NULL)",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY AUTOINCREMENT "
+                        },
+                        {
+                            "type": "UNIQUE",
+                            "definition": "UNIQUE "
+                        },
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "name",
+                    "type": "CHAR",
+                    "constraints": [
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "type",
+                    "type": "CHAR",
+                    "constraints": [
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "animation_id",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "FOREIGN KEY",
+                            "definition": "REFERENCES animations (id) "
+                        },
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                }
+            ],
+            "rows": [
+                [
+                    1,
+                    "Small Gelly",
+                    "consumable",
+                    7
+                ]
+            ]
+        },
+        {
+            "type": "table",
+            "database": null,
+            "name": "folders",
+            "withoutRowId": true,
+            "ddl": "CREATE TABLE folders (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL, path CHAR UNIQUE NOT NULL)",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "INTEGER",
+                    "constraints": [
+                        {
+                            "type": "PRIMARY KEY",
+                            "definition": "PRIMARY KEY AUTOINCREMENT "
+                        },
+                        {
+                            "type": "UNIQUE",
+                            "definition": "UNIQUE "
+                        },
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                },
+                {
+                    "name": "path",
+                    "type": "CHAR",
+                    "constraints": [
+                        {
+                            "type": "UNIQUE",
+                            "definition": "UNIQUE "
+                        },
+                        {
+                            "type": "NOT NULL",
+                            "definition": "NOT NULL"
+                        }
+                    ]
+                }
+            ],
+            "rows": [
+                [
+                    1,
+                    "graphics\/"
+                ],
+                [
+                    2,
+                    "sounds\/"
                 ]
             ]
         }

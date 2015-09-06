@@ -35,7 +35,7 @@ function Action:update(dt, objectArray)
     self.yMoved = self.yMoved + yVel
     if (self.xMoved >= self.xToMove) and (self.yMoved >= self.yToMove) then
       self.running = false
-      SOUND:playMusic(1)
+      SOUND:playMusic(4)
     end
   end
 end
