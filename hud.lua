@@ -12,7 +12,7 @@ function hud:draw()
 	love.graphics.setColor(40, 50, 227)
     love.graphics.rectangle("fill", 100, 100, 400, 100)
     love.graphics.setColor(255,255,255)
-    love.graphics.print (table.getn(main:objectArray),110,110)
+  --  love.graphics.print (table.getn(main:objectArray),110,110)
 
   --end
 end
