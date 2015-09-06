@@ -29,8 +29,9 @@ function SoundManager:playMusic(soundId)
     local soundinfo = self.db:getRowById('sounds', soundId)
     local soundPath = self.db:getValueById('folders', soundinfo['folder_id'], 'path')..soundinfo['filename']
   	self.storedSounds[soundId] = love.audio.newSource(soundPath)
+    self.storedSounds[soundId]:setLooping(true)
   end
-  
+
   return love.audio.play(self.storedSounds[soundId])
 end
     

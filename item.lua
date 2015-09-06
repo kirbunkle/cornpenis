@@ -31,8 +31,9 @@ end
 function Item:draw()
   if self.active then
     GameObject.draw(self)
-    if self.hoverTimer > 1 then
-      love.graphics.print(self.name, self.x, self.y)
+    if self.hoverTimer > 0.5 then
+      love.graphics.print(self.name, INPUT.mouseX, INPUT.mouseY + 20)
+      love.graphics.print(self.type, INPUT.mouseX, INPUT.mouseY + 33)
     end
   end
 end

@@ -24,7 +24,7 @@ function love.load()
   objectArray[1] = pc -- first element; arrays are 1 based
   objectArray[2] = Character:new(2, 500, 400)
   objectArray[3] = Character:new(3, 300, 100)
-  objectArray[4] = Item:new(1, 800, 800)
+  objectArray[4] = Item:new(1, 760, 800)
   
   
   map = sti.new("maps/test")
@@ -36,6 +36,7 @@ function love.load()
 end
 
 function love.update(dt)
+  INPUT:update(dt)
   controller:update(dt, objectArray, map)
   
   map:update(dt)

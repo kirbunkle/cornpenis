@@ -1,5 +1,4 @@
 local class = require 'lib.middleclass.middleclass'
-local Input = require 'input'
 local Action = require 'action'
 
 require 'mapRoutines'
@@ -7,7 +6,6 @@ require 'mapRoutines'
 local Controller = class('Controller')
 
 function Controller:initialize()
-  self.input = Input:new()
 
   self.playerControl = false
   self.actions = {}
@@ -19,10 +17,8 @@ function Controller:initialize()
 end
 
 function Controller:update(dt, objectArray, map)
-  self.input:update(dt)
-  
   -- TODO update to use love.mousepressed instead of this business
-  local items, len = WORLD:queryPoint(self.input.clickX - map.x, self.input.clickY - map.y)
+  local items, len = WORLD:queryPoint(INPUT.mouseX - map.x, INPUT.mouseY - map.y)
   
   for i = 1, len do
     if items[i].onHover then
@@ -30,7 +26,7 @@ function Controller:update(dt, objectArray, map)
     end
   end
   
-  if self.input.clickPressed then
+  if INPUT.clickPressed then
     for i = 1, len do
       if items[i].onClick then
         items[i]:onClick()
@@ -71,19 +67,19 @@ function Controller:getPlayerVel(dt)
   local vel = self.vel
   local xVel = 0
   local yVel = 0
-  if self.input.dashPressed then
+  if INPUT.dashPressed then
     vel = vel * self.dashMultiplier
   end
-  if self.input.upPressed then
+  if INPUT.upPressed then
     yVel = yVel + (dt * -vel)
   end 
-  if self.input.downPressed then
+  if INPUT.downPressed then
     yVel = yVel + (dt * vel)
   end 
-  if self.input.rightPressed then
+  if INPUT.rightPressed then
     xVel = xVel + (dt * vel)
   end 
-  if self.input.leftPressed then
+  if INPUT.leftPressed then
     xVel = xVel + (dt * -vel)
   end   
   return xVel, yVel
