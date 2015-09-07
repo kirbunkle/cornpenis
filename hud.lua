@@ -22,6 +22,7 @@ left2 = love.graphics.newImage("/graphics/2left.png")
 mid3 = love.graphics.newImage("/graphics/3mid.png")
 right3 = love.graphics.newImage("/graphics/3right.png")
 left3 = love.graphics.newImage("/graphics/3left.png")
+mid4 = love.graphics.newImage("/graphics/4mid.png")
 
 function hud:draw()
 	--if self.hud == nil then
@@ -60,8 +61,11 @@ function hud:draw()
     	self.count == 3 then
     	love.graphics.draw(mid2,140,110)
      elseif
-    	self.count <= 4 then
+    	self.count == 2 then
     	love.graphics.draw(mid3,140,110)
+    elseif
+    	self.count == 1 then
+    	love.graphics.draw(mid4,140,110)
     end
 
   --end
