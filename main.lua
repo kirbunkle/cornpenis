@@ -48,6 +48,7 @@ function love.update(dt)
     if v:isDestroyed() then
       table.remove(objectArray, i)
     end
+    hud:setCount(#objectArray)
   end
 end
 
