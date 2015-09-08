@@ -1,7 +1,5 @@
 local class = require 'lib.middleclass.middleclass'
 
-require 'globals'
-
 local GameObject = class('GameObject')
 
 function GameObject:initialize(fx, fy)  

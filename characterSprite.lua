@@ -1,8 +1,6 @@
 local class = require 'lib.middleclass.middleclass'
 local Sprite = require 'sprite'
 
-require 'globals'
-
 --global constants
 DIR_DOWN = 1
 DIR_UP = 2

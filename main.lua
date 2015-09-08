@@ -30,15 +30,14 @@ function love.load()
   
   
   map = sti.new("maps/test")
-  map.x = 0
-  map.y = 0
   initMapCollision(map)
   hud = Hud:new()
-  
 end
 
 function love.update(dt)
   INPUT:update(dt)
+  TOOLTIP:update(dt)
+  
   controller:update(dt, objectArray, map)
   
   map:update(dt)
@@ -48,18 +47,20 @@ function love.update(dt)
     if v:isDestroyed() then
       table.remove(objectArray, i)
     end
-    hud:setCount(#objectArray)
   end
+  
+  hud:setCount(#objectArray)
 end
 
 function love.draw()
   love.graphics.push()
-  love.graphics.translate(map.x, map.y)
-  map:setDrawRange(map.x, map.y, SCREEN.w, SCREEN.h)
+  love.graphics.translate(SCREEN.mapX, SCREEN.mapY)
+  map:setDrawRange(SCREEN.mapX, SCREEN.mapY, SCREEN.w, SCREEN.h)
   map:draw()
   for i, v in ipairs(objectArray) do
     v:draw()
   end
   love.graphics.pop()
   hud:draw()
+  TOOLTIP:draw()
 end

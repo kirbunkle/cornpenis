@@ -13,8 +13,10 @@ self.count = n
 
 end
 
+
+--These are global if you put them here, they should be in initialize with self added to them (self.mid, self.right, etc)
 mid = love.graphics.newImage("/graphics/1mid.png")
-right = love.graphics.newImage("/graphics/1right.png")
+right = love.graphics.newImage("/graphics/1right.png") -- this is what the graphics manager is for; GRAPHICS:getImage(id), but you have to put it in the database
 left = love.graphics.newImage("/graphics/1left.png")
 mid2 = love.graphics.newImage("/graphics/2mid.png")
 right2 = love.graphics.newImage("/graphics/2right.png")
@@ -27,7 +29,7 @@ mid4 = love.graphics.newImage("/graphics/4mid.png")
 function hud:draw()
 	--if self.hud == nil then
 	love.graphics.setColor(40, 50, 227)
-    love.graphics.rectangle("fill", 100, 100, 400, 100)
+    love.graphics.rectangle("fill", 100, 100, 400, 100) -- dat surprise indentation
     love.graphics.setColor(255,255,255)
     love.graphics.print (self.count,110,110)
 

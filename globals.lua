@@ -3,7 +3,8 @@ local GraphicsManager = require 'graphicsManager'
 local SoundManager = require 'soundManager'
 local Database = require 'database'
 local Input = require 'input'
-local Hud = require 'hud'
+local Screen = require 'screen'
+local Tooltip = require 'tooltip'
 
 -- global objects
 WORLD = nil
@@ -11,24 +12,19 @@ GRAPHICS = nil
 SOUND = nil
 DB = nil
 INPUT = nil
-SCREEN = {}
+SCREEN = nil
+TOOLTIP = nil
 
 function initWorld()
   WORLD = bump.newWorld()
 end
 
-function initScreen()
-  SCREEN.w, SCREEN.h = love.graphics.getDimensions()
-  SCREEN.midW = SCREEN.w / 2
-  SCREEN.midH = SCREEN.h / 2
-end
-
 function initGlobals()
   initWorld()
   DB = Database:new()
-  GRAPHICS = GraphicsManager:new(DB)
-  SOUND = SoundManager:new(DB)
+  GRAPHICS = GraphicsManager:new()
+  SOUND = SoundManager:new()
   INPUT = Input:new()
-  --HUD = Hud:new()
-  initScreen()
+  SCREEN = Screen:new()
+  TOOLTIP = Tooltip:new()
 end

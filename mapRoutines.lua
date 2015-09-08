@@ -1,25 +1,3 @@
-require 'globals'
-
-function moveMap(map, x, y)
-  --TODO what do we do when the map is smaller than the screen?
-  local lowerX = SCREEN.w - (map.width * map.tilewidth)  
-  local lowerY = SCREEN.h - (map.height * map.tileheight)
-  
-  if x > 0 then 
-    x = 0
-  elseif x < lowerX then
-    x = lowerX
-  end
-  if y > 0 then
-    y = 0
-  elseif y < lowerY then
-    y = lowerY
-  end
-  
-  map.x = x
-  map.y = y
-end
-
 -- copied from sti collision setup to allow use with bump instead of love.physics
 function initMapCollision(map)
 

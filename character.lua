@@ -2,8 +2,6 @@ local class = require 'lib.middleclass.middleclass'
 local CharacterSprite = require 'characterSprite'
 local GameObject = require 'gameObject'
 
-require 'globals'
-
 local Character = class('Character', GameObject)
 
 function Character:initialize(spriteId, fx, fy)

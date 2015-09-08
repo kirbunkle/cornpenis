@@ -2,8 +2,6 @@ local class = require 'lib.middleclass.middleclass'
 local Sprite = require 'sprite'
 local GameObject = require 'gameObject'
 
-require 'globals'
-
 local Item = class('Item', GameObject)
 
 function Item:initialize(id, fx, fy)
@@ -25,21 +23,24 @@ function Item:update(dt)
     else
       self.hoverTimer = 0
     end
+    if self.hoverTimer > 0.5 then
+      TOOLTIP:setText({ self.name, self.type })
+    end
   end
 end
 
 function Item:draw()
   if self.active then
     GameObject.draw(self)
-    if self.hoverTimer > 0.5 then
-      love.graphics.print(self.name, INPUT.mouseX, INPUT.mouseY + 20)
-      love.graphics.print(self.type, INPUT.mouseX, INPUT.mouseY + 33)
-    end
   end
 end
 
 function Item:onHover()
   self.hovering = true
+end
+
+function Item:onClick()
+  self:destroy()
 end
 
 return Item

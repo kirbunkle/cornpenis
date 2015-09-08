@@ -39,6 +39,12 @@ function Database:getValueById(table, id, field)
   return row[field]
 end
 
+function Database:getFilePath(table, id)
+  --assumes table has folder_id and filename to build the proper path
+  local tableData = self:getRowById(table, id)
+  return self:getValueById('folders', tableData['folder_id'], 'path')..tableData['filename']
+end
+
 function Database:debug()
   --love.graphics.print(self.rawdata)
   love.graphics.print(self.gamedata['objects']['animations']['rows'][2]['name'])

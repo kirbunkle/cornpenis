@@ -1,8 +1,6 @@
 local class = require 'lib.middleclass.middleclass'
 local anim8 = require 'lib.anim8.anim8'
 
-require 'globals'
-
 local Animation = class('Animation')
 
 function Animation:initialize(id)

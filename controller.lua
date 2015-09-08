@@ -18,7 +18,7 @@ end
 
 function Controller:update(dt, objectArray, map)
   -- TODO update to use love.mousepressed instead of this business
-  local items, len = WORLD:queryPoint(INPUT.mouseX - map.x, INPUT.mouseY - map.y)
+  local items, len = WORLD:queryPoint(INPUT.mouseX - SCREEN.mapX, INPUT.mouseY - SCREEN.mapY)
   
   for i = 1, len do
     if items[i].onHover then
@@ -60,7 +60,7 @@ function Controller:center(centerObject, map)
   local moveX = (SCREEN.midW - (w / 2)) - x
   local moveY = (SCREEN.midH - (h / 2)) - y
   
-  moveMap(map, moveX, moveY)
+  SCREEN:moveMap(map, moveX, moveY)
 end
 
 function Controller:getPlayerVel(dt)
