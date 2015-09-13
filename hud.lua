@@ -26,11 +26,13 @@ right3 = love.graphics.newImage("/graphics/3right.png")
 left3 = love.graphics.newImage("/graphics/3left.png")
 mid4 = love.graphics.newImage("/graphics/4mid.png")
 
+
 function hud:draw()
 	--if self.hud == nil then
 	love.graphics.setColor(40, 50, 227)
     love.graphics.rectangle("fill", 100, 100, 400, 100) -- dat surprise indentation
     love.graphics.setColor(255,255,255)
+	
     love.graphics.print (self.count,110,110)
 
     if (self.count == 4) and INPUT.rightPressed then

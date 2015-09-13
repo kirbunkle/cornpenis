@@ -12,6 +12,15 @@ local objectArray = nil
 local controller = nil
 local map = nil
 local hud = nil
+local lovetest = require "test/lovetest"
+
+function love.load(arg)
+  -- Check for the testing command line flags
+  if lovetest.detect(arg) then
+    -- Run the tests
+    lovetest.run()
+  end
+end
 
 function love.load()
   initGlobals()
