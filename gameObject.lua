@@ -7,10 +7,13 @@ function GameObject:initialize(fx, fy)
   self.w, self.h = self.sprite:getWH()
   self.x = fx
   self.y = fy
+  self.offsetY = self.h - self.w
+  if self.offsetY < 0 then self.offsetY = 0 end
+  self.collideY = self.y + self.offsetY
   self.xVel = 0
   self.yVel = 0
   self.active = true -- flag to tell when to clean this thing up
-  WORLD:add(self, fx, fy, self.w, self.h)
+  WORLD:add(self, self.x, self.collideY, self.w, self.w)
 end
 
 function GameObject:update(dt)
@@ -35,7 +38,8 @@ function GameObject:move(xVel, yVel)
     local cols = 0
     local len = 0
 
-    self.x, self.y, cols, len = WORLD:move(self, self.x + self.xVel, self.y + self.yVel)
+    self.x, self.collideY, cols, len = WORLD:move(self, self.x + self.xVel, self.collideY + self.yVel)
+    self.y = self.collideY - self.offsetY
   end
 end
 

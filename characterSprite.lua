@@ -26,6 +26,9 @@ function CharacterSprite:initialize(characterSpriteId)
   animationIds[DIR_RIGHT + ACT_WALK] = data['walking_right_animation_id']
   animationIds[DIR_LEFT + ACT_WALK] = data['walking_left_animation_id']
   
+  self.collideW = data['collide_w']
+  self.collideH = data['collide_h']
+  
   Sprite.initialize(self, animationIds)
 end
 
