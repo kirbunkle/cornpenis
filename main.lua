@@ -6,12 +6,12 @@ local sti = require "lib.sti"
 local Character = require 'character'
 local Item = require 'item'
 local Controller = require 'controller'
-local Hud = require 'hud'
+--local Hud = require 'hud'
 
 local objectArray = nil
 local controller = nil
 local map = nil
-local hud = nil
+--local hud = nil
 local lovetest = require "test/lovetest"
 
 function love.load(arg)
@@ -26,7 +26,7 @@ function love.load()
   initGlobals()
   controller = Controller:new()
   -- init objects
-  local pc = Character:new(4, 100, 100)
+  local pc = Character:new(5, 100, 100)
   objectArray = {}
   
   
@@ -40,7 +40,7 @@ function love.load()
   
   map = sti.new("maps/test")
   initMapCollision(map)
-  hud = Hud:new()
+  --hud = Hud:new()
 end
 
 function love.update(dt)
@@ -58,7 +58,7 @@ function love.update(dt)
     end
   end
   
-  hud:setCount(#objectArray)
+  --hud:setCount(#objectArray)
 end
 
 function love.draw()
@@ -70,6 +70,6 @@ function love.draw()
     v:draw()
   end
   love.graphics.pop()
-  hud:draw()
+  --hud:draw()
   TOOLTIP:draw()
 end
