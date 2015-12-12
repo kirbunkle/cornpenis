@@ -12,18 +12,17 @@ local objectArray = nil
 local controller = nil
 local map = nil
 --local hud = nil
-local lovetest = require "test/lovetest"
+--local lovetest = require "test/lovetest"
 
 function love.load(arg)
   -- Check for the testing command line flags
-  if lovetest.detect(arg) then
+  --if lovetest.detect(arg) then
     -- Run the tests
-    lovetest.run()
-  end
-end
-
-function love.load()
+  --  lovetest.run()
+  --end
+  
   initGlobals()
+  
   controller = Controller:new()
   -- init objects
   local pc = Character:new(5, 100, 100)
