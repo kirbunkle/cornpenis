@@ -1,22 +1,14 @@
 local class = require 'lib.middleclass.middleclass'
-local Action = require 'action'
 
 require 'mapRoutines'
 
 local Controller = class('Controller')
 
 function Controller:initialize()
-
-  self.playerControl = false
-  self.actions = {}
-  self.actions[1] = Action:new('1') --TODO need to add action text to be parsed
-  self.actions[2] = Action:new('2')
-
-  self.vel = 300
-  self.dashMultiplier = 2
+  SCRIPT_MANAGER:loadScriptForMap()
 end
 
-function Controller:update(dt, objectArray, map)
+function Controller:update(dt)
   -- TODO update to use love.mousepressed instead of this business
   local items, len = WORLD:queryPoint(INPUT.mouseX - SCREEN.mapX, INPUT.mouseY - SCREEN.mapY)
   
@@ -33,56 +25,18 @@ function Controller:update(dt, objectArray, map)
       end
     end
   end
-
-  local actionCount = #self.actions
-  if actionCount > 0 then 
-    for i = actionCount, 1, -1 do 
-      if self.actions[i].running then
-        self.actions[i]:update(dt, objectArray)
-      else
-        table.remove(self.actions, i)
-      end
-    end
-  else
-    self.playerControll = true
-  end
   
-  if self.playerControll then
-    -- if controlling is enabled, update objectArray[1] (player character)
-    local xVel, yVel = self:getPlayerVel(dt)
-    objectArray[1]:move(xVel, yVel)
-    self:center(objectArray[1], map)
-  end
+  SCRIPT_MANAGER:update(dt)
+  OBJECT_MANAGER:update(dt)
+  MAP_MANAGER:update(dt)
 end
 
-function Controller:center(centerObject, map)
-  local x, y, w, h = centerObject:getDimensions()
-  local moveX = (SCREEN.midW - (w / 2)) - x
-  local moveY = (SCREEN.midH - (h / 2)) - y
-  
-  SCREEN:moveMap(map, moveX, moveY)
-end
-
-function Controller:getPlayerVel(dt)
-  local vel = self.vel
-  local xVel = 0
-  local yVel = 0
-  if INPUT.dashPressed then
-    vel = vel * self.dashMultiplier
-  end
-  if INPUT.upPressed then
-    yVel = yVel + (dt * -vel)
-  end 
-  if INPUT.downPressed then
-    yVel = yVel + (dt * vel)
-  end 
-  if INPUT.rightPressed then
-    xVel = xVel + (dt * vel)
-  end 
-  if INPUT.leftPressed then
-    xVel = xVel + (dt * -vel)
-  end   
-  return xVel, yVel
+function Controller:draw()
+  love.graphics.push()
+  love.graphics.translate(SCREEN.mapX, SCREEN.mapY)
+  MAP_MANAGER:draw()
+  OBJECT_MANAGER:draw()
+  love.graphics.pop()
 end
 
 return Controller
