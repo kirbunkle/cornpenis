@@ -10,6 +10,7 @@ local GameData = require 'gameData'
 local ScriptManager = require 'scriptManager'
 local MapManager = require 'mapManager'
 local ObjectManager = require 'objectManager'
+local Hud = require 'hud'
 
 -- global objects
 WORLD = nil
@@ -25,6 +26,7 @@ GAME_DATA = nil
 SCRIPT_MANAGER = nil
 MAP_MANAGER = nil
 OBJECT_MANAGER = nil
+HUD = nil
 
 function initWorld()
   WORLD = bump.newWorld()
@@ -43,6 +45,7 @@ function initGlobals()
   SCRIPT_MANAGER = ScriptManager:new()
   MAP_MANAGER = MapManager:new()
   OBJECT_MANAGER = ObjectManager:new()
+  HUD = Hud:new()
 end
 
 function split(str, delim, maxNb)

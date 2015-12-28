@@ -40,6 +40,11 @@ function Item:onHover()
 end
 
 function Item:onClick()
+  local itemdata = {}
+  -- need to create a class for this, and to differentiate between this and the collidable item
+  itemdata.name = self.name
+  itemdata.type = self.type
+  GAME_DATA:addToInventory(itemdata)
   self:destroy()
 end
 

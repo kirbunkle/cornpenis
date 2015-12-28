@@ -23,6 +23,9 @@ function ScriptManager:loadScriptForMap(mapID, gameData)
   OBJECT_MANAGER:addObject(Character:new(2, 500, 400), 'enemy1')
   OBJECT_MANAGER:addObject(Character:new(3, 300, 100), 'enemy2')
   OBJECT_MANAGER:addObject(Item:new(1, 760, 800), 'item1')
+  OBJECT_MANAGER:addObject(Item:new(1, 740, 820), 'item2')
+  OBJECT_MANAGER:addObject(Item:new(1, 740, 780), 'item3')
+
   
   self:addAction(self.actionFactory:make('control player'))
   self:addAction(self.actionFactory:make('move enemy1'))

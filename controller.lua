@@ -6,6 +6,7 @@ local Controller = class('Controller')
 
 function Controller:initialize()
   SCRIPT_MANAGER:loadScriptForMap()
+  self.menuPressed = false
 end
 
 function Controller:update(dt)
@@ -26,9 +27,19 @@ function Controller:update(dt)
     end
   end
   
+  if INPUT.menuPressed then
+    if not self.menuPressed then
+      HUD:toggleMenu(MENU_ID_INVENTORY)
+      self.menuPressed = true
+    end
+  else
+    self.menuPressed = false
+  end
+  
   SCRIPT_MANAGER:update(dt)
   OBJECT_MANAGER:update(dt)
   MAP_MANAGER:update(dt)
+  HUD:update(dt)
 end
 
 function Controller:draw()
@@ -37,6 +48,7 @@ function Controller:draw()
   MAP_MANAGER:draw()
   OBJECT_MANAGER:draw()
   love.graphics.pop()
+  HUD:draw()
 end
 
 return Controller

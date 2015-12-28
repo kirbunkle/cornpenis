@@ -15,6 +15,8 @@ function Input:initialize()
   self.dashPressed = false
   self.click = 'l'
   self.clickPressed = false
+  self.menu = 'escape'
+  self.menuPressed = false
   self.clickX = 0
   self.clickY = 0
   self.mouseX = 0
@@ -28,6 +30,7 @@ function Input:update(dt)
   self.rightPressed = love.keyboard.isDown(self.right)
   self.dashPressed = love.keyboard.isDown(self.dash)
   self.clickPressed = love.mouse.isDown(self.click)
+  self.menuPressed = love.keyboard.isDown(self.menu)
   self.mouseX, self.mouseY = love.mouse.getPosition()
   if self.clickPressed then
     self.clickX, self.clickY = love.mouse.getPosition()

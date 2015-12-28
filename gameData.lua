@@ -28,8 +28,13 @@ function GameData:swapItemsInInventory(idA, idB)
   self.playerInventory[idB] = tmpItem
 end
 
-function GameData:addToInventory(item, id)
+function GameData:addToInventory(item)
   -- id could be position in inventory maybe
+  local id = 1
+  while self.playerInventory[id] ~= nil do
+    id = id + 1
+  end
+  -- what if inventory is full
   self.playerInventory[id] = item
 end
 
@@ -39,6 +44,10 @@ end
 
 function GameData:getGameDate()
   return self.gameDate
+end
+
+function GameData:getInventory()
+  return self.playerInventory
 end
 
 function GameData:update(dt)
