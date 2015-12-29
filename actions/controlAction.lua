@@ -14,19 +14,19 @@ function ControlAction:getPlayerVel(dt)
   local vel = self.vel
   local xVel = 0
   local yVel = 0
-  if INPUT.dashPressed then
+  if INPUT.dashDown then
     vel = vel * self.dashMultiplier
   end
-  if INPUT.upPressed then
+  if INPUT.upDown then
     yVel = yVel + (dt * -vel)
   end 
-  if INPUT.downPressed then
+  if INPUT.downDown then
     yVel = yVel + (dt * vel)
   end 
-  if INPUT.rightPressed then
+  if INPUT.rightDown then
     xVel = xVel + (dt * vel)
   end 
-  if INPUT.leftPressed then
+  if INPUT.leftDown then
     xVel = xVel + (dt * -vel)
   end   
   return xVel, yVel

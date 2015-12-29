@@ -48,4 +48,8 @@ function Item:onClick()
   self:destroy()
 end
 
+function Item:getChat()
+  return "Got "..self.name
+end
+
 return Item

@@ -36,7 +36,7 @@ function Character:update(dt)
     else
       self.curAct = ACT_WALK
       if not self.stepSoundToggle then
-        SOUND:playSE(2)
+        --SOUND:playSE(2)
         self.stepSoundToggle = true
       end
     end
@@ -47,7 +47,11 @@ function Character:update(dt)
 end
 
 function Character:onClick()
-  self:destroy()
+  print('clicked me: ', self)
+end
+
+function Character:getChat()
+  return "Ok... so let's talk about this. We need to find out wtf is up with your mom because DAMN she is FINEEEEE. Well idk maybe not super hot but she cleans up pretty nice. So. Uh, what else. I don't really have a ton of brocolli right now so maybe you can go get some. Thanks sugar."
 end
 
 return Character

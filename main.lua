@@ -1,30 +1,27 @@
 require 'globals'
 require 'mapRoutines'
 
-local Controller = require 'controller'
-
-local controller = nil
---local lovetest = require "test/lovetest"
-
 function love.load(arg)
-  -- Check for the testing command line flags
-  --if lovetest.detect(arg) then
-    -- Run the tests
-  --  lovetest.run()
-  --end
-  
   initGlobals()
-  
-  controller = Controller:new()
+  SCRIPT_MANAGER:loadScriptForMap()
 end
 
 function love.update(dt)
   INPUT:update(dt)
   TOOLTIP:update(dt)
-  controller:update(dt)
+  SCRIPT_MANAGER:update(dt)
+  OBJECT_MANAGER:update(dt)
+  MAP_MANAGER:update(dt)
+  HUD:update(dt)
 end
 
 function love.draw()
-  controller:draw()
+  love.graphics.push()
+  love.graphics.translate(SCREEN.mapX, SCREEN.mapY)
+  MAP_MANAGER:draw()
+  OBJECT_MANAGER:draw()
+  love.graphics.pop()
+  
+  HUD:draw()  
   TOOLTIP:draw()
 end
