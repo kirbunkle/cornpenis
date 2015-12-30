@@ -3,13 +3,13 @@ require 'mapRoutines'
 
 function love.load(arg)
   initGlobals()
-  SCRIPT_MANAGER:loadScriptForMap()
+  CONTROLLER:loadScriptForMap()
 end
 
 function love.update(dt)
   INPUT:update(dt)
   TOOLTIP:update(dt)
-  SCRIPT_MANAGER:update(dt)
+  CONTROLLER:update(dt)
   OBJECT_MANAGER:update(dt)
   MAP_MANAGER:update(dt)
   HUD:update(dt)

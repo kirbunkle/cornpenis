@@ -39,7 +39,7 @@ function Item:onHover()
   self.hovering = true
 end
 
-function Item:onClick()
+function Item:interact()
   local itemdata = {}
   -- need to create a class for this, and to differentiate between this and the collidable item
   itemdata.name = self.name

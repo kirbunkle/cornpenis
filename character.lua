@@ -46,12 +46,16 @@ function Character:update(dt)
   end
 end
 
-function Character:onClick()
+function Character:interact()
   print('clicked me: ', self)
 end
 
 function Character:getChat()
   return "Ok... so let's talk about this. We need to find out wtf is up with your mom because DAMN she is FINEEEEE. Well idk maybe not super hot but she cleans up pretty nice. So. Uh, what else. I don't really have a ton of brocolli right now so maybe you can go get some. Thanks sugar."
+end
+
+function Character:getDir()
+  return self.curDir
 end
 
 return Character

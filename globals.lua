@@ -7,7 +7,7 @@ local Screen = require 'screen'
 local Tooltip = require 'tooltip'
 
 local GameData = require 'gameData'
-local ScriptManager = require 'scriptManager'
+local Controller = require 'controller'
 local MapManager = require 'mapManager'
 local ObjectManager = require 'objectManager'
 local Hud = require 'hud'
@@ -23,7 +23,7 @@ TOOLTIP = nil
 
 -- global but really for controller
 GAME_DATA = nil
-SCRIPT_MANAGER = nil
+CONTROLLER = nil
 MAP_MANAGER = nil
 OBJECT_MANAGER = nil
 HUD = nil
@@ -42,7 +42,7 @@ function initGlobals()
   TOOLTIP = Tooltip:new()
   
   GAME_DATA = GameData:new()
-  SCRIPT_MANAGER = ScriptManager:new()
+  CONTROLLER = Controller:new()
   MAP_MANAGER = MapManager:new()
   OBJECT_MANAGER = ObjectManager:new()
   HUD = Hud:new()

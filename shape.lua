@@ -25,6 +25,4 @@ function Shape:draw()
   love.graphics.pop()
 end
 
-
-
 return Shape

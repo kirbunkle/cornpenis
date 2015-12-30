@@ -23,6 +23,4 @@ function InventoryMenu:draw()
   end
 end
 
-
-
 return InventoryMenu

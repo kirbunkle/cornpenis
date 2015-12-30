@@ -11,19 +11,29 @@ function Screen:initialize()
 end
 
 function Screen:moveMap(map, x, y)
-  --TODO what do we do when the map is smaller than the screen?
-  local lowerX = self.w - (map.width * map.tilewidth)  
-  local lowerY = self.h - (map.height * map.tileheight)
+  local mapW = map.width * map.tilewidth
+  local mapH = map.height * map.tileheight
   
-  if x > 0 then 
-    x = 0
-  elseif x < lowerX then
-    x = lowerX
+  if self.w > mapW then
+    x = self.midW - (mapW / 2)
+  else
+    local lowerX = self.w - mapW
+    if x > 0 then 
+      x = 0
+    elseif x < lowerX then
+      x = lowerX
+    end
   end
-  if y > 0 then
-    y = 0
-  elseif y < lowerY then
-    y = lowerY
+  
+  if self.h > mapH then
+    y = self.midH - (mapH / 2)
+  else
+    local lowerY = self.h - mapH
+    if y > 0 then
+      y = 0
+    elseif y < lowerY then
+      y = lowerY
+    end
   end
   
   self.mapX = x

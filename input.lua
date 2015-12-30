@@ -28,7 +28,7 @@ function Input:initialize()
   self.dashPressed = false
   self.dashCheck = false
   
-  self.click = 'l'
+  self.click = 1
   self.clickDown = false
   self.clickPressed = false
   self.clickCheck = false
@@ -37,6 +37,11 @@ function Input:initialize()
   self.menuDown = false
   self.menuPressed = false
   self.menuCheck = false
+  
+  self.action = 'space'
+  self.actionDown = false
+  self.actionPressed = false
+  self.actionCheck = false
   
   self.anyDown = false
   self.anyPressed = false
@@ -81,7 +86,11 @@ function Input:update(dt)
   self.menuPressed = (not self.menuCheck) and self.menuDown
   self.menuCheck = self.menuDown
   
-  self.anyDown = self.upDown or self.downDown or self.leftDown or self.rightDown or self.dashDown or self.clickDown or self.menuDown
+  self.actionDown = love.keyboard.isDown(self.action)
+  self.actionPressed = (not self.actionCheck) and self.actionDown
+  self.actionCheck = self.actionDown
+  
+  self.anyDown = self.upDown or self.downDown or self.leftDown or self.rightDown or self.dashDown or self.menuDown or self.actionDown
   self.anyPressed = (not self.anyCheck) and self.anyDown
   self.anyCheck = self.anyDown
 end
