@@ -1,12 +1,13 @@
 local class = require 'lib.middleclass.middleclass'
 
-local InventoryMenu = require 'inventoryMenu'
+local InventoryMenu = require 'menus.inventoryMenu'
+local HudMenu = require 'menus.hudMenu'
 local Shape = require 'shape'
-local Hud = class('Hud')
+local MenuManager = class('MenuManager')
 
 MENU_ID_INVENTORY = 'inventory'
 
-function Hud:initialize()
+function MenuManager:initialize()
   self.curDisplay = ''
   self.displays = {}
   self.displays[MENU_ID_INVENTORY] = InventoryMenu:new()
@@ -20,9 +21,11 @@ function Hud:initialize()
   self.textX = self.textPadding
   self.textY = SCREEN.midH + self.textPadding
   self.textW = (SCREEN.w - (self.textPadding * 2)) / self.textZoom
+  
+  self.hud = HudMenu:new()
 end
 
-function Hud:switchToMenu(menuId)
+function MenuManager:switchToMenu(menuId)
   if menuId == MENU_ID_INVENTORY then 
     self.curDisplay = MENU_ID_INVENTORY
   else
@@ -30,7 +33,7 @@ function Hud:switchToMenu(menuId)
   end
 end
 
-function Hud:toggleMenu(menuId)
+function MenuManager:toggleMenu(menuId)
   if self.curDisplay == menuId then
     self:switchToMenu('')
   else
@@ -38,7 +41,7 @@ function Hud:toggleMenu(menuId)
   end
 end
 
-function Hud:displayText(text)
+function MenuManager:displayText(text)
   if (text ~= nil) and (string.len(text) > 0) then
     self.text = text
   else
@@ -46,11 +49,12 @@ function Hud:displayText(text)
   end
 end
 
-function Hud:clearText()
+function MenuManager:clearText()
   self.text = nil
 end
 
-function Hud:update(dt)
+function MenuManager:update(dt)
+  self.hud:update(dt)
   if self.displays[self.curDisplay] ~= nil then
     self.displays[self.curDisplay]:update(dt)
   end
@@ -59,7 +63,8 @@ function Hud:update(dt)
   end
 end
 
-function Hud:draw()
+function MenuManager:draw()
+  self.hud:draw()
   if self.displays[self.curDisplay] ~= nil then
     self.displays[self.curDisplay]:draw()
   end
@@ -69,4 +74,4 @@ function Hud:draw()
   end
 end
 
-return Hud
+return MenuManager

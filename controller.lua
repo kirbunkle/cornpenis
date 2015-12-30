@@ -16,6 +16,8 @@ function Controller:initialize()
   self.textCounter = 0
   self.textMax = 0
   self.letterDelay = 0.03
+  
+  self.playerControl = true
 end
 
 function Controller:addAction(action)
@@ -52,6 +54,10 @@ function Controller:displayText(text)
   self.textBeingDisplayed = ''
 end
 
+function Controller:playerHasControl()
+  return self.playerControl
+end
+
 function Controller:runTextProcess(dt)
   if self.textCounter < self.textMax then
     self.textTimer = self.textTimer + dt
@@ -73,7 +79,7 @@ function Controller:runTextProcess(dt)
       self.textBeingDisplayed = ''
     end
   end
-  HUD:displayText(self.textBeingDisplayed)
+  MENU_MANAGER:displayText(self.textBeingDisplayed)
 end
 
 function Controller:runActions(dt)
@@ -91,7 +97,8 @@ end
 
 function Controller:processInput(dt)
   if INPUT.menuPressed then
-    HUD:toggleMenu(MENU_ID_INVENTORY)
+    -- TODO need to figure out how to sort this so when the inventory is open we don't have control (only have control in the menu
+    MENU_MANAGER:toggleMenu(MENU_ID_INVENTORY)
   elseif INPUT.actionPressed then
     local player = OBJECT_MANAGER:getObjectById('player')
     if WORLD:hasItem(player) then
@@ -150,9 +157,11 @@ end
 function Controller:update(dt)
   if self.textArray ~= nil then
     -- pause actions, display text
+    self.playerControl = false
     self:runTextProcess(dt)
   else
     -- no text, just run actions
+    self.playerControl = true
     self:runActions(dt)
     self:processInput(dt)
   end

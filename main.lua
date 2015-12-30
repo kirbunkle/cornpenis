@@ -9,10 +9,11 @@ end
 function love.update(dt)
   INPUT:update(dt)
   TOOLTIP:update(dt)
+  GAME_DATA:update(dt)
   CONTROLLER:update(dt)
   OBJECT_MANAGER:update(dt)
   MAP_MANAGER:update(dt)
-  HUD:update(dt)
+  MENU_MANAGER:update(dt)
 end
 
 function love.draw()
@@ -22,6 +23,6 @@ function love.draw()
   OBJECT_MANAGER:draw()
   love.graphics.pop()
   
-  HUD:draw()  
+  MENU_MANAGER:draw()  
   TOOLTIP:draw()
 end

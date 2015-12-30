@@ -5,8 +5,8 @@ local GameData = class('GameData')
 function GameData:initialize()
   -- load game from save?
   self.persistantObjects = {}
-  self.gameTime = 0
-  self.gameDate = 0
+  self.gameTime = 6.5 * 60 -- 6:30 am
+  self.gameDate = 1
   self.playerInventory = {}
 end
 
@@ -51,7 +51,9 @@ function GameData:getInventory()
 end
 
 function GameData:update(dt)
-  --update game time and other things
+  if CONTROLLER:playerHasControl() then
+    self.gameTime = self.gameTime + dt
+  end
 end
 
 return GameData
