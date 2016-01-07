@@ -4,7 +4,7 @@ local sti = require "lib.sti"
 local MapManager = class('MapManager')
 
 function MapManager:initialize(id)
-  self.map = sti.new("maps/test")
+  self.map = sti.new("maps/demo1")
   initMapCollision(self.map)
 end
 
